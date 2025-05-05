@@ -22,3 +22,14 @@ Many of these methods were inspired by this thread and related ones:
 
 There were no eureka moments on this thread either. and I think that I would rather use anything else than Mac if I were to try and solve this in the future. For now I will just have an entry based scaling setup between the signals as dB will be difficult without the Python block.
 
+**AM Results:**
+
+With a slightly less elegant implementation, it is still possible to see when and how signals begin to dominate over another at a certain gain difference between the two.
+By 20dB under the other signal, the frequency content graph ceases to visible change.
+At 20dB there is just a little woble left from the less dominant frequency, but by 30dB it vanishes.
+These are true across a wide range of modulating and carrier frequencies.
+
+**FM Results:**
+
+I took a similar approach and used a simple scale instead of decibels. With FM, the capture effect can be seen extremely early, meaning that the weaker signal soon has next to no part of the final combined signal.
+At a 1:6 ratio, it is nearly impossible to see any non-sinusoidal or abnormal qualities in the output. This is significantly better compared to AM taking over 100x to stop oscillating up and down. This is not surprise though, since the FM demodulation amplifier typically drives the signal to the rails, washing out most of the lower amplitude signals at the same frequency.

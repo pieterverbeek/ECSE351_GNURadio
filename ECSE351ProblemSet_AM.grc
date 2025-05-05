@@ -75,10 +75,10 @@ blocks:
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
-    start: '300'
-    step: '100'
-    stop: '2700'
-    value: '1000'
+    start: '2500'
+    step: '250'
+    stop: '10000'
+    value: '5000'
     widget: counter_slider
   states:
     bus_sink: false
@@ -108,7 +108,7 @@ blocks:
     coordinate: [416, 40.0]
     rotation: 0
     state: enabled
-- name: relative_scale_dB
+- name: relative_scale
   id: variable_qtgui_range
   parameters:
     comment: ''
@@ -117,11 +117,11 @@ blocks:
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
-    start: '0'
-    step: '5'
-    stop: '60'
-    value: '0'
-    widget: counter_slider
+    start: '1'
+    step: '10000'
+    stop: '100000'
+    value: '1'
+    widget: eng_slider
   states:
     bus_sink: false
     bus_source: false
@@ -228,30 +228,13 @@ blocks:
     coordinate: [192, 524.0]
     rotation: 0
     state: enabled
-- name: analog_const_source_x_3
-  id: analog_const_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: '.1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [480, 396.0]
-    rotation: 0
-    state: enabled
 - name: analog_const_source_x_3_0
   id: analog_const_source_x
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    const: relative_scale_dB
+    const: relative_scale
     maxoutbuf: '0'
     minoutbuf: '0'
     type: complex
@@ -259,7 +242,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [480, 452.0]
+    coordinate: [584, 452.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -408,6 +391,24 @@ blocks:
     coordinate: [832, 388.0]
     rotation: 0
     state: enabled
+- name: blocks_divide_xx_0
+  id: blocks_divide_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 492.0]
+    rotation: 0
+    state: enabled
 - name: blocks_multiply_xx_0
   id: blocks_multiply_xx
   parameters:
@@ -480,78 +481,6 @@ blocks:
     coordinate: [216, 428.0]
     rotation: 0
     state: enabled
-- name: blocks_multiply_xx_2
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [792, 500.0]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_xx_2_0
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [640, 412.0]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_xx_3
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1216, 512.0]
-    rotation: 0
-    state: enabled
-- name: blocks_nlog10_ff_0
-  id: blocks_nlog10_ff
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    k: '0'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    n: '1'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [976, 540.0]
-    rotation: 0
-    state: enabled
 - name: blocks_throttle2_0
   id: blocks_throttle2
   parameters:
@@ -594,79 +523,6 @@ blocks:
     coordinate: [616, 544.0]
     rotation: 0
     state: enabled
-- name: epy_block_0
-  id: epy_block
-  parameters:
-    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
-      \ GRC will instantiate the first class it finds\nto get ports and parameters\
-      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
-      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
-      from gnuradio import gr\n\n\nclass blk(gr.sync_block):  # other base classes\
-      \ are basic_block, decim_block, interp_block\n    \"\"\"Embedded Python Block\
-      \ example - a simple multiply const\"\"\"\n\n    def __init__(self, example_param=1.0):\
-      \  # only default arguments here\n        \"\"\"arguments to this function show\
-      \ up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n         \
-      \   self,\n            name='Embedded Python Block',   # will show up in GRC\n\
-      \            in_sig=[np.complex64],\n            out_sig=[np.complex64]\n  \
-      \      )\n        # if an attribute with the same name as a parameter is found,\n\
-      \        # a callback is registered (properties work, too).\n        self.example_param\
-      \ = example_param\n\n    def work(self, input_items, output_items):\n      \
-      \  \"\"\"example: multiply with constant\"\"\"\n        output_items[0][:] =\
-      \ input_items[0] * self.example_param\n        return len(output_items[0])\n"
-    affinity: ''
-    alias: ''
-    comment: ''
-    example_param: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    _io_cache: ('Embedded Python Block', 'blk', [('example_param', '1.0')], [('0',
-      'complex', 1)], [('0', 'complex', 1)], 'Embedded Python Block example - a simple
-      multiply const', ['example_param'])
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1184, 76.0]
-    rotation: 0
-    state: enabled
-
-- name: dB_scaler
-  id: blocks_embedded_python
-  parameters:
-    # any Python imports your code needs
-    imports: |
-      import numpy as np
-      from gnuradio import gr
-    # the block class itself
-    code: |
-      class blk(gr.sync_block):
-          """
-          Scale a complex stream by 10^(gain_dB/20)
-          """
-          def __init__(self, gain_dB=0.0):
-              gr.sync_block.__init__(
-                  self,
-                  name="dB Scaler",
-                  in_sig=[np.complex64],
-                  out_sig=[np.complex64]
-              )
-              self.set_gain(gain_dB)
-
-          def set_gain(self, gain_D​B):
-              # recompute linear gain from dB slider
-              self.gain_lin = 10 ** (gain_D​B / 20.0)
-
-          def work(self, input_items, output_items):
-              out = output_items[0]
-              # elementwise multiply by current gain
-              out[:] = input_items[0] * self.gain_lin
-              return len(out)
-    # wire your slider variable into the block
-    gain_dB: relative_scale_dB
-  states:
-    coordinate: [520, 180.0]
-    rotation: 0
-    state: enabled
 - name: qtgui_sink_x_0
   id: qtgui_sink_x
   parameters:
@@ -703,9 +559,7 @@ connections:
 - [analog_const_source_x_0_0, '0', blocks_multiply_xx_1_0, '1']
 - [analog_const_source_x_1, '0', blocks_add_xx_0, '1']
 - [analog_const_source_x_1_0, '0', blocks_add_xx_0_0, '1']
-- [analog_const_source_x_3, '0', blocks_multiply_xx_2_0, '0']
-- [analog_const_source_x_3_0, '0', dB_scaler,       '0']
-- [dB_scaler,               '0', blocks_multiply_xx_2_0, '1']
+- [analog_const_source_x_3_0, '0', blocks_divide_xx_0, '1']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_1, '0']
 - [analog_sig_source_x_0_0, '0', blocks_multiply_xx_1_0, '0']
 - [analog_sig_source_x_1, '0', blocks_multiply_xx_0, '1']
@@ -713,12 +567,13 @@ connections:
 - [blocks_add_xx_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_add_xx_0_0, '0', blocks_multiply_xx_0_0, '0']
 - [blocks_add_xx_1, '0', analog_am_demod_cf_0, '0']
+- [blocks_divide_xx_0, '0', blocks_add_xx_1, '1']
 - [blocks_multiply_xx_0, '0', blocks_throttle2_0, '0']
 - [blocks_multiply_xx_0_0, '0', blocks_throttle2_0_0, '0']
 - [blocks_multiply_xx_1, '0', blocks_add_xx_0, '0']
 - [blocks_multiply_xx_1_0, '0', blocks_add_xx_0_0, '0']
 - [blocks_throttle2_0, '0', blocks_add_xx_1, '0']
-- [blocks_throttle2_0_0, '0', blocks_multiply_xx_2, '1']
+- [blocks_throttle2_0_0, '0', blocks_divide_xx_0, '0']
 
 metadata:
   file_format: 1
