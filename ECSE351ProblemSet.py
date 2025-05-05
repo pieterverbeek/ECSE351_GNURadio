@@ -63,7 +63,7 @@ class ECSE351ProblemSet(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 64000
+        self.samp_rate = samp_rate = 500000
         self.mod_index = mod_index = .5
         self.f_mod = f_mod = 1000
         self.f_carrier = f_carrier = 10000
