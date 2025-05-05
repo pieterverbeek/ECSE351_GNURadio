@@ -1,6 +1,6 @@
 # ECSE351_GNURadio
 
-## Problem 2.3 Thresholding Demonstration
+## Problem 2.3 - Thresholding Demonstration
 
 **Criteria:**
 1. Signal source blocks with modulation index and other controls

@@ -22,22 +22,97 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: Not titled yet
+    title: Thresholding Demonstration
     window_size: (1000,1000)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [56, 28.0]
+    coordinate: [32, 28.0]
     rotation: 0
     state: enabled
 
 blocks:
+- name: AM_amp
+  id: variable
+  parameters:
+    comment: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 40.0]
+    rotation: 0
+    state: enabled
+- name: f_carrier
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '5000'
+    step: '.1'
+    stop: '15000'
+    value: '10000'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [584, 48.0]
+    rotation: 0
+    state: enabled
+- name: f_mod
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '300'
+    step: '100'
+    stop: '2700'
+    value: '1000'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 32.0]
+    rotation: 0
+    state: enabled
+- name: mod_index
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '.1'
+    stop: '1'
+    value: '.5'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 48.0]
+    rotation: 0
+    state: enabled
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: '32000'
+    value: '64000'
   states:
     bus_sink: false
     bus_source: false
@@ -45,7 +120,200 @@ blocks:
     coordinate: [192, 32.0]
     rotation: 0
     state: enabled
-connections: []
+- name: analog_const_source_x_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: mod_index
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [64, 308.0]
+    rotation: 0
+    state: enabled
+- name: analog_const_source_x_1
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '1.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 308.0]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: f_mod
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    showports: 'False'
+    type: float
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 172.0]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_1
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: f_carrier
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    showports: 'False'
+    type: float
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 340.0]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [400, 212.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [480, 228.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_1
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 196.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle2_0
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [584, 240.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    plotconst: 'False'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'True'
+    type: float
+    wintype: window.WIN_KAISER
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 224.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_const_source_x_0, '0', blocks_multiply_xx_1, '1']
+- [analog_const_source_x_1, '0', blocks_add_xx_0, '1']
+- [analog_sig_source_x_0, '0', blocks_multiply_xx_1, '0']
+- [analog_sig_source_x_1, '0', blocks_multiply_xx_0, '1']
+- [blocks_add_xx_0, '0', blocks_multiply_xx_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_throttle2_0, '0']
+- [blocks_multiply_xx_1, '0', blocks_add_xx_0, '0']
+- [blocks_throttle2_0, '0', qtgui_sink_x_0, '0']
 
 metadata:
   file_format: 1
