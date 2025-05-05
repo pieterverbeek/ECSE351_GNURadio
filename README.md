@@ -33,3 +33,7 @@ These are true across a wide range of modulating and carrier frequencies.
 
 I took a similar approach and used a simple scale instead of decibels. With FM, the capture effect can be seen extremely early, meaning that the weaker signal soon has next to no part of the final combined signal.
 At a 1:6 ratio, it is nearly impossible to see any non-sinusoidal or abnormal qualities in the output. This is significantly better compared to AM taking over 100x to stop oscillating up and down. This is not surprise though, since the FM demodulation amplifier typically drives the signal to the rails, washing out most of the lower amplitude signals at the same frequency.
+
+## Conclusion
+
+In GNURadio Companion, I was able to see how different signals interact with eachother at the demodulation side in both FM and AM. Although I spent a lot of time working through issues that I did not ultimately solve, I can definitely appreciate the GNURadio Companion is a powerful tool for digital signal processing and radio.
