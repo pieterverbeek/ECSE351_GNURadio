@@ -9,6 +9,7 @@
 4. Visualization and audio output
 
 **Ran into serious roadblock**
+
 For the scaling between the two signals, I intended to use the Python Block to convert a slider in dB to a decimal scaling factor. I ran into issues with not being able to edit to code on Mac. I implemented several strategies which did not ultimately work.
 
 - Used different text editors: XCode, VSCode, TextEditor, TextMate, RStudio(desperation), Chrome, Notepad, Terminal
